@@ -1,0 +1,156 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-cream: #f8f6f0;
+  --color-paper: #efebe1;
+  --color-ink: #292b27;
+  /* #74766E from the brief is 4.26:1 on cream. Small text uses #62645D (5.55:1). */
+  --color-muted: #62645d;
+  --color-muted-large: #74766e;
+  --color-sage: #a7b69b;
+  --color-sage-deep: #3e4a38;
+  --color-terracotta: #c98168;
+  --color-terracotta-deep: #9c553e;
+  --color-beige: #d9c5a8;
+  --color-blue: #9dafbf;
+
+  --font-display: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+
+  --radius-photo: 1.25rem;
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    overflow-x: clip;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-ink;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-terracotta-deep);
+    outline-offset: 3px;
+    border-radius: 0.375rem;
+  }
+
+  ::selection {
+    background: var(--color-sage);
+    color: var(--color-ink);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-10;
+  }
+
+  .btn {
+    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-full px-6 text-base font-semibold;
+    transition:
+      background-color 200ms ease,
+      color 200ms ease,
+      transform 160ms var(--ease-out-soft);
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  .btn-primary {
+    @apply bg-ink text-cream hover:bg-sage-deep;
+  }
+  .btn-secondary {
+    @apply bg-white text-ink ring-1 ring-ink/20 hover:bg-paper;
+  }
+  .btn-light {
+    @apply bg-cream text-ink hover:bg-white;
+  }
+
+  .text-link {
+    @apply inline-flex min-h-11 cursor-pointer items-center gap-1.5 font-semibold text-ink underline decoration-ink/30 decoration-2 underline-offset-4 hover:decoration-terracotta-deep;
+    transition: text-decoration-color 200ms ease;
+  }
+
+  /* Shadows only on elements that float over the page. */
+  .overlay-dialog { box-shadow: 0 30px 60px -20px rgb(41 43 39 / 0.45); } /* taste-skill-ignore: dialog */
+  .overlay-chip { box-shadow: 0 18px 40px -18px rgb(41 43 39 / 0.45); } /* taste-skill-ignore: chip floats over the photo */
+  .overlay-bar-top { box-shadow: 0 1px 0 rgb(41 43 39 / 0.08); } /* taste-skill-ignore: sticky bar */
+  .overlay-menu { box-shadow: 0 24px 40px -24px rgb(41 43 39 / 0.45); } /* taste-skill-ignore: menu panel */
+  .overlay-bar-bottom { box-shadow: 0 -1px 0 rgb(41 43 39 / 0.1), 0 -12px 30px -20px rgb(41 43 39 / 0.4); } /* taste-skill-ignore: fixed bar */
+
+  .demo-tag {
+    @apply inline-flex items-center rounded-full bg-cream/95 px-2.5 py-1 text-[13px] leading-none font-medium text-ink;
+  }
+
+  /* Entrance: the parts of each section rise a little as they come into view. */
+  .reveal > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 700ms var(--ease-out-soft),
+      transform 700ms var(--ease-out-soft);
+  }
+  .reveal.is-visible > * {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal.is-visible > *:nth-child(2) {
+    transition-delay: 80ms;
+  }
+  .reveal.is-visible > *:nth-child(3) {
+    transition-delay: 160ms;
+  }
+  .reveal.is-visible > *:nth-child(n + 4) {
+    transition-delay: 240ms;
+  }
+
+  .photo-zoom img {
+    transition: transform 900ms var(--ease-out-soft);
+  }
+  @media (hover: hover) {
+    .photo-zoom:hover img {
+      transform: scale(1.04);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .photo-zoom img,
+  .btn {
+    transition: none;
+  }
+  .photo-zoom:hover img {
+    transform: none;
+  }
+  .btn:active {
+    transform: none;
+  }
+}

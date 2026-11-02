@@ -1,0 +1,210 @@
+@import 'tailwindcss';
+
+/* Design tokens. All colours come from the TrueCoat brief.
+   soft-ink is a darker step of the brief's #727B75. It gives small text a contrast of more than 4.5:1. */
+@theme {
+  --color-paper: #f7f8f6;
+  --color-mist: #eaefe8;
+  --color-dark: #202824;
+  --color-dark-2: #2b3530;
+  --color-ink: #28312c;
+  --color-soft: #727b75;
+  --color-soft-ink: #59625c;
+  --color-green: #477b59;
+  --color-green-deep: #386348;
+  --color-green-light: #a8cdb3;
+  --color-warm: #dfa96a;
+  --color-warm-deep: #9a6a2e;
+
+  --font-display: 'Manrope Variable', 'Manrope', system-ui, sans-serif;
+  --font-sans: 'Inter Variable', 'Inter', system-ui, sans-serif;
+  --font-ui: 'DM Sans Variable', 'DM Sans', system-ui, sans-serif;
+
+  --ease-out-strong: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    color-scheme: light;
+  }
+  /* On phones the fixed contact bar covers the bottom of the screen. Keep focused items above it. */
+  @media (max-width: 767px) {
+    html {
+      scroll-padding-bottom: 5.5rem;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    font-size: 1rem;
+    line-height: 1.55;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-balance;
+    letter-spacing: -0.025em;
+  }
+  ::selection {
+    background: var(--color-warm);
+    color: var(--color-dark);
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-warm);
+    outline-offset: 3px;
+  }
+  img {
+    max-width: 100%;
+  }
+}
+
+@layer components {
+  /* One pair of outer margins for the whole page. */
+  .frame {
+    width: 100%;
+    max-width: 1600px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 5rem);
+  }
+
+  /* One button shape: a flat pill with a 48px minimum height. */
+  .btn {
+    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full px-6 font-ui text-[16px] font-semibold whitespace-nowrap select-none;
+    transition:
+      background-color 160ms ease,
+      color 160ms ease,
+      transform 160ms var(--ease-out-strong);
+    touch-action: manipulation;
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  .btn-green {
+    @apply bg-green text-white hover:bg-green-deep;
+  }
+  .btn-dark {
+    @apply bg-dark text-white hover:bg-ink;
+  }
+  .btn-light {
+    @apply bg-white text-ink hover:bg-mist;
+  }
+  .btn-outline {
+    @apply border-2 border-ink bg-transparent text-ink;
+  }
+  .btn-outline:hover {
+    @apply bg-ink text-white;
+  }
+  .btn-outline-light {
+    @apply border-2 border-white/85 bg-transparent text-white;
+  }
+  .btn-outline-light:hover {
+    @apply bg-white text-ink;
+  }
+
+  .text-link {
+    @apply inline-flex min-h-11 cursor-pointer items-center gap-1.5 font-ui font-semibold underline decoration-2 underline-offset-[6px];
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+    transition: text-decoration-color 160ms ease;
+  }
+  .text-link:hover {
+    text-decoration-color: currentColor;
+  }
+
+  /* The small label on every sample photo. */
+  .demo-tag {
+    @apply pointer-events-none absolute top-3 left-3 rounded-full bg-dark/80 px-3 py-1 font-ui text-[13px] font-medium text-white;
+  }
+}
+
+/* Entrance motion. Content is only hidden when JavaScript runs (the "js" class),
+   so the page stays readable if the script fails. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+    transition:
+      opacity 700ms var(--ease-out-strong),
+      transform 700ms var(--ease-out-strong);
+    transition-delay: var(--d, 0ms);
+  }
+  .js .reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Hero headline: each line rises from behind its own baseline. */
+  .mask-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+  .mask-line > span {
+    display: block;
+    animation: line-up 900ms var(--ease-out-strong) both;
+    animation-delay: var(--d, 0ms);
+  }
+  .hero-fade {
+    animation: fade-up 700ms var(--ease-out-strong) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  /* Hero photo: one fresh coat passes across the tired room, from left to right. */
+  .coat-reveal {
+    animation: coat 1700ms cubic-bezier(0.65, 0, 0.35, 1) 450ms both;
+  }
+  .coat-edge {
+    animation: coat-edge 1700ms cubic-bezier(0.65, 0, 0.35, 1) 450ms both;
+  }
+}
+
+@keyframes line-up {
+  from {
+    transform: translate3d(0, 105%, 0);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes coat {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes coat-edge {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(100%, 0, 0);
+    opacity: 0;
+  }
+}
+
+/* The fixed mobile action bar needs room at the end of the page: the footer has matching bottom padding. */

@@ -1,0 +1,10 @@
+node_modules/
+dist/
+_site/
+*.log
+.DS_Store
+Thumbs.db
+
+# Local agent skills. They are not part of the websites.
+.claude/
+skills-lock.json

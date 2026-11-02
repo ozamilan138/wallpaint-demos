@@ -1,0 +1,221 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Colours from the brief. */
+  --color-paper: #f7f8f6;
+  --color-ink: #252e29;
+  /* The brief grey (#737C75) is 4.05:1 on paper. Small grey text uses this darker grey (5.49:1). */
+  --color-muted: #5e6761;
+  --color-muted-soft: #737c75;
+  --color-accent: #527d62;
+  --color-accent-deep: #3f6650;
+  --color-sand: #d49a61;
+  --color-sand-soft: #efe0cf;
+  --color-mist: #e7eee7;
+  --color-dark: #252e29;
+  --color-dark-2: #2f3a34;
+  --color-on-dark-muted: #a9b3ac;
+
+  --font-display: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-ui: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 76px;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
+  }
+  a,
+  button,
+  summary {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgb(82 125 98 / 0.18);
+  }
+  @media (max-width: 767px) {
+    /* Keep focused elements clear of the fixed contact bar. */
+    html {
+      scroll-padding-bottom: 96px;
+    }
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    font-size: 17px;
+    line-height: 1.55;
+    overflow-x: clip;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .on-dark :focus-visible,
+  .on-photo :focus-visible {
+    outline-color: var(--color-sand);
+  }
+  ::selection {
+    background: var(--color-sand);
+    color: var(--color-ink);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  /* One pair of page margins for the whole site. */
+  .shell {
+    @apply mx-auto w-full max-w-[1360px] px-5 sm:px-8 lg:px-12;
+  }
+
+  .btn {
+    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full px-6 font-ui text-[16px] font-semibold whitespace-nowrap select-none;
+    transition:
+      background-color 160ms ease,
+      color 160ms ease,
+      transform 160ms var(--ease-out-soft);
+    touch-action: manipulation;
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  .btn-accent {
+    @apply bg-accent text-white hover:bg-accent-deep;
+  }
+  .btn-light {
+    @apply bg-paper text-ink hover:bg-white;
+  }
+  .btn-dark {
+    @apply bg-ink text-paper hover:bg-dark-2;
+  }
+  .btn-outline-light {
+    @apply bg-white/10 text-white ring-2 ring-white/70 ring-inset hover:bg-white/20;
+  }
+  .btn-outline-dark {
+    @apply text-ink ring-2 ring-ink/80 ring-inset hover:bg-ink/5;
+  }
+
+  .link-arrow {
+    @apply inline-flex min-h-11 cursor-pointer items-center gap-1.5 font-ui text-[16px] font-semibold text-accent-deep underline decoration-2 underline-offset-4 hover:text-ink;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  }
+
+  .demo-tag {
+    @apply pointer-events-none absolute rounded-full bg-ink/75 px-2.5 py-1 font-ui text-[13px] font-medium text-white;
+  }
+
+  .field {
+    @apply block w-full rounded-lg bg-white px-4 py-3 text-[16px] text-ink ring-1 ring-ink/25 ring-inset placeholder:text-muted-soft;
+    min-height: 48px;
+    transition: box-shadow 160ms ease;
+  }
+  .field:focus-visible {
+    outline: none;
+    @apply ring-2 ring-accent;
+  }
+  .field[aria-invalid='true'] {
+    @apply ring-2 ring-[#b3261e];
+  }
+}
+
+/* Entrances. Content is visible without script; the script adds .reveal-ready first. */
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 700ms var(--ease-out-soft),
+    transform 700ms var(--ease-out-soft);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+.reveal-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* The hero photo opens like a shutter, once. */
+@keyframes shutter {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes settle {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.shutter {
+  animation: shutter 1100ms var(--ease-out-soft) both;
+}
+.shutter > img {
+  animation: settle 1600ms var(--ease-out-soft) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .shutter,
+  .shutter > img {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* Room for the fixed mobile action bar at the end of the page. */
+.pb-action-bar {
+  padding-bottom: calc(76px + env(safe-area-inset-bottom));
+}
+@media (min-width: 768px) {
+  .pb-action-bar {
+    padding-bottom: 0;
+  }
+}
+
+/* A short fade when the gallery filter changes. */
+@keyframes gallery-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.gallery-in {
+  animation: gallery-in 420ms var(--ease-out-soft) both;
+  animation-delay: calc(var(--i, 0) * 50ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .gallery-in {
+    animation: none;
+  }
+}
