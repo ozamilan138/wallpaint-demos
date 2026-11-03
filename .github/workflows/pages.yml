@@ -26,15 +26,14 @@ jobs:
           cache: npm
           cache-dependency-path: '*/package-lock.json'
 
+      # The sites in archive/ are not published.
       - name: Build each demo into its own subfolder
         env:
           REPO: ${{ github.event.repository.name }}
         run: |
           set -euo pipefail
           mkdir -p _site
-          for dir in aureline-atelier the-transformation colour-studio \
-                     truecoat-trusted truecoat-transformations truecoat-paint-plan \
-                     truecoat-complete truecoat-homes truecoat-your-colours; do
+          for dir in simple-aureline simple-truecoat-trusted simple-truecoat-complete; do
             echo "::group::$dir"
             (cd "$dir" && npm ci --no-audit --no-fund \
               && npm run build -- --base="/$REPO/$dir/" --outDir "../_site/$dir" --emptyOutDir)

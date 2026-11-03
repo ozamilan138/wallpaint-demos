@@ -4,24 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Painting Company Website Demos</title>
-    <meta name="description" content="Nine demo websites for a residential painting company." />
+    <meta name="description" content="Three demo websites for a small residential painting company." />
     <meta name="robots" content="noindex" />
     <style>
       :root { --bg: #f7f6f2; --text: #26302b; --muted: #5d655f; --line: #dcdcd4; --accent: #456b53; }
       * { box-sizing: border-box; }
       body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-      main { max-width: 1040px; margin: 0 auto; padding: 56px 20px 72px; }
+      main { max-width: 960px; margin: 0 auto; padding: 56px 20px 72px; }
       h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.01em; }
-      .lead { color: var(--muted); max-width: 60ch; margin: 0 0 48px; }
-      section { margin-bottom: 44px; }
-      h2 { font-size: 1.15rem; margin: 0 0 4px; }
-      .group-note { color: var(--muted); margin: 0 0 16px; font-size: 0.95rem; }
-      ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-      a { display: block; height: 100%; padding: 18px 20px; background: #fff; border: 1px solid var(--line); border-radius: 12px; color: inherit; text-decoration: none; transition: border-color .15s, transform .15s; }
+      .lead { color: var(--muted); max-width: 60ch; margin: 0 0 40px; }
+      ul { list-style: none; margin: 0 0 48px; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      a { display: block; height: 100%; padding: 20px; background: #fff; border: 1px solid var(--line); border-radius: 12px; color: inherit; text-decoration: none; transition: border-color .15s, transform .15s; }
       a:hover { border-color: var(--accent); transform: translateY(-2px); }
       a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
       .num { color: var(--accent); font-weight: 600; font-size: 0.85rem; }
-      .name { display: block; font-weight: 600; font-size: 1.05rem; margin: 2px 0 4px; }
+      .name { display: block; font-weight: 600; font-size: 1.1rem; margin: 2px 0 4px; }
       .desc { color: var(--muted); font-size: 0.92rem; }
       footer { color: var(--muted); font-size: 0.88rem; border-top: 1px solid var(--line); padding-top: 20px; }
       @media (prefers-reduced-motion: reduce) { a { transition: none; } a:hover { transform: none; } }
@@ -30,37 +27,13 @@
   <body>
     <main>
       <h1>Painting Company Website Demos</h1>
-      <p class="lead">Nine demo websites for a residential painting company. Each demo uses a temporary business name. The photos, testimonials and contact details are demo content.</p>
+      <p class="lead">Three simple demo websites for a small residential painting company. Each demo uses a temporary business name. The photos, testimonials and contact details are demo content.</p>
 
-      <section>
-        <h2>Aureline Painting Co.</h2>
-        <p class="group-note">A premium brand.</p>
-        <ul>
-          <li><a href="./aureline-atelier/"><span class="num">01</span><span class="name">Aureline Atelier</span><span class="desc">An editorial site in the style of an interior design studio.</span></a></li>
-          <li><a href="./the-transformation/"><span class="num">02</span><span class="name">The Transformation</span><span class="desc">A portfolio site with a before-and-after slider.</span></a></li>
-          <li><a href="./colour-studio/"><span class="num">03</span><span class="name">The Colour Studio</span><span class="desc">A colour discovery tool: room, mood, then palette.</span></a></li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>TrueCoat Painting Co.: affordable and reliable</h2>
-        <p class="group-note">A brand that is affordable and reliable.</p>
-        <ul>
-          <li><a href="./truecoat-trusted/"><span class="num">04</span><span class="name">The Trusted Choice</span><span class="desc">A site that builds trust, with an enquiry form and an FAQ.</span></a></li>
-          <li><a href="./truecoat-transformations/"><span class="num">05</span><span class="name">Real Transformations</span><span class="desc">A portfolio site with a before-and-after slider.</span></a></li>
-          <li><a href="./truecoat-paint-plan/"><span class="num">06</span><span class="name">Paint &amp; Plan</span><span class="desc">A colour planner and a project form.</span></a></li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>TrueCoat Painting Co.: professional for all budgets</h2>
-        <p class="group-note">A brand that is professional for all budgets.</p>
-        <ul>
-          <li><a href="./truecoat-complete/"><span class="num">07</span><span class="name">The Complete Painting Solution</span><span class="desc">Flexible painting options on an interactive floor plan.</span></a></li>
-          <li><a href="./truecoat-homes/"><span class="num">08</span><span class="name">Homes Made Beautiful</span><span class="desc">A portfolio site with a slider and project types.</span></a></li>
-          <li><a href="./truecoat-your-colours/"><span class="num">09</span><span class="name">Your Home, Your Colours</span><span class="desc">A planner in five steps with a summary of requirements.</span></a></li>
-        </ul>
-      </section>
+      <ul>
+        <li><a href="./simple-aureline/"><span class="num">01 · Premium</span><span class="name">Aureline Painting Co.</span><span class="desc">A calm editorial site with services, work, colour ideas and contact.</span></a></li>
+        <li><a href="./simple-truecoat-trusted/"><span class="num">02 · Affordable and reliable</span><span class="name">TrueCoat: The Trusted Choice</span><span class="desc">A friendly local site with services, work, FAQ and an estimate form.</span></a></li>
+        <li><a href="./simple-truecoat-complete/"><span class="num">03 · Professional for all budgets</span><span class="name">TrueCoat: One Room to the Whole Home</span><span class="desc">A site with three painting options, work, FAQ and an estimate form.</span></a></li>
+      </ul>
 
       <footer>The demo photos come from Unsplash. The photos do not show completed projects.</footer>
     </main>

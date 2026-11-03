@@ -1,0 +1,127 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ground: #fafaf7;
+  --color-field: #f0f3ed;
+  --color-ink: #26332c;
+  /* The brief grey. Use it on the ground colour and on white only. */
+  --color-muted: #6b746d;
+  /* A darker grey for small text on the field colour, for 4.5:1 contrast. */
+  --color-muted-strong: #5e6760;
+  --color-green: #527b61;
+  --color-green-deep: #466b53;
+  --color-green-dark: #34503f;
+  --color-amber: #d8a45d;
+  --color-amber-soft: #f3e3c6;
+
+  --font-display: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ground font-sans text-ink antialiased;
+    -webkit-tap-highlight-color: rgb(82 123 97 / 0.15);
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-balance;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-amber);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: var(--color-amber-soft);
+  }
+
+  /* The fixed contact bar on phones must not cover a focused field. */
+  @media (max-width: 767px) {
+    html {
+      scroll-padding-bottom: 6rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-[76rem] px-5 sm:px-8;
+  }
+
+  .btn {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-base font-medium whitespace-nowrap transition-[background-color,color,transform] duration-200 select-none;
+    touch-action: manipulation;
+  }
+
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  .btn-primary {
+    @apply bg-green text-white hover:bg-green-deep;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-ink/15 bg-white text-ink hover:border-ink/30 hover:bg-field;
+  }
+
+  .section-title {
+    @apply text-[1.75rem] leading-tight font-extrabold sm:text-4xl;
+  }
+
+  .text-link {
+    @apply inline-flex min-h-11 items-center gap-1.5 font-medium text-green-deep underline decoration-green/30 underline-offset-4 transition-colors hover:text-green-dark hover:decoration-green-dark;
+  }
+
+  /* Shadows only on real overlays: the dialog, the fixed bar and the sticky navigation. */
+  .shadow-dialog {
+    box-shadow: 0 24px 60px -20px rgb(38 51 44 / 0.45); /* taste-skill-ignore: real overlay */
+  }
+
+  .shadow-bar {
+    box-shadow: 0 -8px 24px -12px rgb(38 51 44 / 0.25); /* taste-skill-ignore: real overlay */
+  }
+
+  .shadow-nav {
+    box-shadow: 0 1px 0 rgb(38 51 44 / 0.08); /* taste-skill-ignore: real overlay */
+  }
+
+  .demo-dialog::backdrop {
+    background: rgb(38 51 44 / 0.55);
+  }
+
+  .demo-dialog {
+    @apply rounded-3xl;
+    overscroll-behavior: contain;
+    max-height: calc(100dvh - 2rem);
+  }
+}
+
+/* The footer has a large bottom padding on phones (see Footer.tsx).
+   This keeps the mobile action bar off the page content. */

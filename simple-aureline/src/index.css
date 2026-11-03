@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* The sticky header is 68px tall. Anchor targets stop below it. */
+    scroll-padding-top: 68px;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgb(154 128 99 / 0.18);
+  }
+
+  /* On small screens the fixed contact bar covers the bottom 68px. Focused elements stop above it. */
+  @media (max-width: 1023px) {
+    html {
+      scroll-padding-bottom: 84px;
+    }
+  }
+
+  a,
+  button,
+  label {
+    touch-action: manipulation;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    font-size: 17px;
+    line-height: 1.6;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif font-semibold;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid #9a8063;
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: #d9cdbd;
+    color: #282722;
+  }
+}
+
+@layer components {
+  .page-x {
+    @apply px-5 sm:px-8 lg:px-12;
+  }
+
+  .btn {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2.5 px-6 text-[15px] font-medium tracking-[0.01em];
+    transition:
+      background-color 200ms ease,
+      color 200ms ease,
+      border-color 200ms ease,
+      transform 160ms ease;
+  }
+
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  .btn-dark {
+    @apply bg-night text-paper hover:bg-bronze-deep;
+  }
+
+  .btn-light {
+    @apply bg-paper text-ink hover:bg-linen;
+  }
+
+  .btn-outline {
+    @apply border border-ink/30 text-ink hover:border-ink hover:bg-ink hover:text-paper;
+  }
+
+  .btn-outline-light {
+    @apply border border-paper/40 text-paper hover:border-paper hover:bg-paper hover:text-ink;
+  }
+
+  .text-link {
+    @apply inline-flex min-h-[44px] items-center gap-2 text-[15px] font-medium text-ink;
+  }
+
+  .text-link span {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+    text-decoration-color: transparent;
+    transition: text-decoration-color 250ms ease;
+  }
+
+  .text-link:hover span,
+  .text-link:focus-visible span {
+    text-decoration-color: currentColor;
+  }
+
+  .text-link svg {
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .text-link:hover svg {
+    transform: translateX(3px);
+  }
+
+  .demo-dialog::backdrop {
+    background: rgb(36 35 31 / 0.55);
+  }
+
+  .demo-dialog[open] {
+    animation: dialog-in 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .demo-dialog[open] {
+    animation: none;
+  }
+
+  .btn,
+  .text-link svg,
+  .text-link span {
+    transition: none;
+  }
+}
