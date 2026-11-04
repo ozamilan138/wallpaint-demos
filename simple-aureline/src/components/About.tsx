@@ -2,9 +2,8 @@ import { Check } from 'lucide-react'
 import { principles, processSteps, testimonials } from '../data/content'
 import { SectionHeading } from './SectionHeading'
 
-// Show real testimonials when there are any. Until then, show the labelled placeholders.
-const realTestimonials = testimonials.filter((t) => !t.isPlaceholder)
-const shownTestimonials = (realTestimonials.length > 0 ? realTestimonials : testimonials).slice(0, 2)
+// The reviews block shows only real, permitted testimonials. Placeholders do not show on the live site.
+const shownTestimonials = testimonials.filter((t) => !t.isPlaceholder).slice(0, 2)
 
 export function About() {
   return (
@@ -47,6 +46,7 @@ export function About() {
         </div>
       </div>
 
+      {shownTestimonials.length > 0 && (
       <div className="mt-14 border-t border-ink/10 pt-10">
         <h3 className="text-[26px] leading-tight">What Clients Say</h3>
         <ul className="mt-5 grid gap-5 md:grid-cols-2">
@@ -57,17 +57,13 @@ export function About() {
                 <figcaption className="mt-3 text-[15px]">
                   <span className="font-medium">{t.name}</span>
                   <span className="text-muted">, {t.context}</span>
-                  {t.isPlaceholder && (
-                    <span className="mt-2 block text-[13px] font-medium text-bronze-deep">
-                      Placeholder, not a real review
-                    </span>
-                  )}
                 </figcaption>
               </figure>
             </li>
           ))}
         </ul>
       </div>
+      )}
     </section>
   )
 }

@@ -23,12 +23,13 @@ export interface BusinessConfig {
 }
 
 export const business: BusinessConfig = {
-  name: 'Aureline Painting Co.',
-  shortName: 'Aureline',
+  name: 'Maruti Paint House',
+  shortName: 'Maruti',
   description:
-    'Residential and apartment painting with thoughtful colour guidance, careful preparation and clean, beautiful finishes.',
-  phone: '',
-  whatsapp: '',
+    'Home and apartment painting with honest colour advice, careful preparation and clean, beautiful finishes.',
+  // One number for calls and for WhatsApp.
+  phone: '+91 87805 74095',
+  whatsapp: '+91 87805 74095',
   email: '',
   serviceLocations: [],
   social: {

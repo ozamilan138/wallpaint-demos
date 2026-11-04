@@ -1,7 +1,8 @@
-import { MessageCircle } from 'lucide-react'
+import { MessageCircle, Phone } from 'lucide-react'
+import { business } from '../config/business'
 import { images } from '../data/images'
 import { ResponsiveImage } from './ResponsiveImage'
-import { WhatsAppAction } from './contact/ContactActions'
+import { CallAction, WhatsAppAction } from './contact/ContactActions'
 import { estimateMessage } from '../lib/contact'
 import { DemoTag } from './DemoTag'
 
@@ -21,6 +22,9 @@ export function Hero() {
         </div>
 
         <div className="lg:order-1">
+          <p className="mb-5 text-[13px] font-medium uppercase tracking-[0.22em] text-bronze-deep">
+            {business.name} · Home Painting
+          </p>
           <h1 id="hero-title" className="text-[clamp(2.5rem,1.6rem+3.4vw,4.25rem)] leading-[1.02]">
             Give Your Walls a New Perspective.
           </h1>
@@ -36,6 +40,13 @@ export function Hero() {
               Explore Our Work
             </a>
           </div>
+          <p className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px] text-muted">
+            <Phone aria-hidden size={16} className="text-bronze-deep" />
+            Call or WhatsApp
+            <CallAction className="font-medium text-ink underline decoration-ink/25 underline-offset-4 transition-colors hover:decoration-ink">
+              {business.phone}
+            </CallAction>
+          </p>
         </div>
       </div>
     </section>

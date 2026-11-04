@@ -1,4 +1,4 @@
-# Aureline Painting Co. — Simple version
+# Maruti Paint House website (simple Aureline design)
 
 A short, single-page website for a small residential painting business.
 This version is a simpler copy of the Aureline Atelier demo. It keeps the warm neutral colours and the serif type, but it shows only what a visitor needs.

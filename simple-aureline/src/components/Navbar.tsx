@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, Phone, X } from 'lucide-react'
 import { navItems } from '../data/content'
 import { WhatsAppAction, CallAction } from './contact/ContactActions'
 import { estimateMessage } from '../lib/contact'
 import { Wordmark } from './Wordmark'
+import { business } from '../config/business'
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
@@ -37,7 +38,7 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-ink/10 bg-paper">
       <nav aria-label="Main" className="page-x mx-auto flex h-[68px] max-w-page items-center justify-between gap-6">
-        <a href="#top" className="shrink-0" aria-label="Aureline Painting Co., back to top" onClick={() => setOpen(false)}>
+        <a href="#top" className="shrink-0" aria-label={`${business.name}, back to top`} onClick={() => setOpen(false)}>
           <Wordmark />
         </a>
 
@@ -52,6 +53,13 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
+          <CallAction
+            className="hidden min-h-[44px] items-center gap-2 whitespace-nowrap px-3 text-[15px] font-medium text-ink transition-colors hover:text-bronze-deep xl:inline-flex"
+            ariaLabel={`Call ${business.phone}`}
+          >
+            <Phone aria-hidden size={16} className="text-bronze-deep" />
+            {business.phone}
+          </CallAction>
           <WhatsAppAction message={estimateMessage} className="btn btn-dark hidden min-h-[44px] whitespace-nowrap px-5 sm:inline-flex">
             Get a Free Estimate
           </WhatsAppAction>

@@ -22,3 +22,15 @@ export function MobileActionBar() {
     </div>
   )
 }
+
+/** A round WhatsApp button for wide screens. Small screens use the contact bar above. */
+export function FloatingWhatsApp() {
+  return (
+    <WhatsAppAction
+      className="fixed bottom-6 right-6 z-30 hidden h-14 w-14 place-items-center rounded-full bg-night text-paper shadow-[0_6px_20px_rgba(36,35,31,0.28)] transition-colors hover:bg-bronze-deep lg:grid"
+      ariaLabel="Chat with us on WhatsApp"
+    >
+      <MessageCircle aria-hidden size={24} />
+    </WhatsAppAction>
+  )
+}

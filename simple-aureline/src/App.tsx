@@ -7,7 +7,7 @@ import { ColourInspiration } from './components/ColourInspiration'
 import { About } from './components/About'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
-import { MobileActionBar } from './components/MobileActionBar'
+import { FloatingWhatsApp, MobileActionBar } from './components/MobileActionBar'
 
 export default function App() {
   return (
@@ -31,6 +31,7 @@ export default function App() {
       {/* This spacer keeps the footer clear of the fixed contact bar on small screens. */}
       <div aria-hidden className="h-[calc(68px+env(safe-area-inset-bottom))] bg-paper lg:hidden" />
       <MobileActionBar />
+      <FloatingWhatsApp />
     </ContactProvider>
   )
 }

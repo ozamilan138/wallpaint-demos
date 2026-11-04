@@ -1,7 +1,7 @@
 /**
  * Demo photographs. All files are in public/images in WebP format.
  * Source and licence for each file are in CREDITS.md.
- * IMPORTANT: These are royalty-free sample images. They are not projects by Aureline Painting Co.
+ * IMPORTANT: These are royalty-free sample images. They are not projects by Maruti Paint House
  * Replace them with verified client photographs before launch.
  */
 export interface ImageAsset {
