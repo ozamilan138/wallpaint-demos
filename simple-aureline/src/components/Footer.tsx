@@ -2,6 +2,7 @@ import { business } from '../config/business'
 import { navItems } from '../data/content'
 import { CallAction, WhatsAppAction } from './contact/ContactActions'
 import { Wordmark } from './Wordmark'
+import { useLanguage } from '../i18n/context'
 
 // Only the social links that the business has show in the footer.
 const socialLinks = [
@@ -17,22 +18,23 @@ const listLink = 'inline-flex min-h-[40px] items-center text-[15px] text-muted t
 const heading = 'font-sans text-[15px] font-semibold tracking-normal'
 
 export function Footer() {
+  const { t } = useLanguage()
   return (
     <footer className="bg-paper">
       <div className="page-x mx-auto max-w-page pb-8 pt-14">
         <div className={`grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-[2fr_1fr_1fr] ${socialLinks.length > 0 ? 'lg:grid-cols-[2fr_1fr_1fr_1fr]' : ''}`}>
           <div className="col-span-2 sm:col-span-1">
             <Wordmark size="lg" />
-            <p className="mt-5 max-w-[26rem] text-[15px] leading-[1.6] text-muted">{business.description}</p>
+            <p className="mt-5 max-w-[26rem] text-[15px] leading-[1.6] text-muted">{t.description}</p>
           </div>
 
-          <nav aria-label="Footer">
-            <h2 className={heading}>Pages</h2>
+          <nav aria-label={t.footer.pages}>
+            <h2 className={heading}>{t.footer.pages}</h2>
             <ul className="mt-2 grid">
               {navItems.map((item) => (
                 <li key={item.href}>
                   <a href={item.href} className={listLink}>
-                    {item.label}
+                    {t.nav[item.key]}
                   </a>
                 </li>
               ))}
@@ -40,13 +42,13 @@ export function Footer() {
           </nav>
 
           <div>
-            <h2 className={heading}>Contact</h2>
+            <h2 className={heading}>{t.footer.contact}</h2>
             <ul className="mt-2 grid">
               <li>
-                <CallAction className={listLink}>{business.phone || 'Call'}</CallAction>
+                <CallAction className={listLink}>{business.phone || t.contact.call}</CallAction>
               </li>
               <li>
-                <WhatsAppAction className={listLink}>WhatsApp</WhatsAppAction>
+                <WhatsAppAction className={listLink}>{t.cta.whatsApp}</WhatsAppAction>
               </li>
               {business.email && (
                 <li>
@@ -60,7 +62,7 @@ export function Footer() {
 
           {socialLinks.length > 0 && (
             <div>
-              <h2 className={heading}>Follow</h2>
+              <h2 className={heading}>{t.footer.follow}</h2>
               <ul className="mt-2 grid">
                 {socialLinks.map((link) => (
                   <li key={link.label}>
@@ -76,9 +78,9 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col gap-2 border-t border-ink/10 pt-6 text-[13px] text-muted sm:flex-row sm:justify-between lg:pr-20">
           <p>
-            © {year} {business.name}
+            © {year} {t.businessName}
           </p>
-          <p>Sample photographs from Unsplash.</p>
+          <p>{t.footer.photos}</p>
         </div>
       </div>
     </footer>

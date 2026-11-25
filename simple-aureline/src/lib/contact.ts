@@ -29,13 +29,3 @@ export function phoneUrl(): string | null {
 export function emailUrl(): string | null {
   return business.email ? `mailto:${business.email}` : null
 }
-
-export function serviceMessage(service: string): string {
-  return `Hello ${business.name}, I am interested in ${service.toLowerCase()} for my home. Could you please share more information?`
-}
-
-export function paletteMessage(paletteName: string, swatches: string[]): string {
-  return `Hello ${business.name}, I like the “${paletteName}” colour palette (${swatches.join(', ')}). I would like to discuss colour ideas for my home.`
-}
-
-export const estimateMessage = `Hello ${business.name}, I would like to request a free painting estimate for my home. Could you please let me know what details you need?`

@@ -25,6 +25,7 @@ export interface BusinessConfig {
 export const business: BusinessConfig = {
   name: 'Maruti Paint House',
   shortName: 'Maruti',
+  // The description and the name in other languages are in src/i18n.
   description:
     'Home and apartment painting with honest colour advice, careful preparation and clean, beautiful finishes.',
   // One number for calls and for WhatsApp.
@@ -39,4 +40,3 @@ export const business: BusinessConfig = {
   },
 }
 
-export const defaultWhatsAppMessage = `Hello ${business.name}, I would like to discuss painting services for my home. Could you please share more information?`

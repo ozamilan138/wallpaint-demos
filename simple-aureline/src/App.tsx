@@ -1,4 +1,6 @@
 import { ContactProvider } from './components/contact/ContactProvider'
+import { LanguageProvider } from './i18n/LanguageProvider'
+import { useLanguage } from './i18n/context'
 import { Navbar } from './components/Navbar'
 import { Hero } from './components/Hero'
 import { Services } from './components/Services'
@@ -11,12 +13,21 @@ import { FloatingWhatsApp, MobileActionBar } from './components/MobileActionBar'
 
 export default function App() {
   return (
+    <LanguageProvider>
+      <Page />
+    </LanguageProvider>
+  )
+}
+
+function Page() {
+  const { t } = useLanguage()
+  return (
     <ContactProvider>
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-night focus:px-4 focus:py-3 focus:text-paper"
       >
-        Skip to content
+        {t.skip}
       </a>
       <Navbar />
       <main id="main">

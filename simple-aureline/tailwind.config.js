@@ -19,8 +19,9 @@ export default {
         mist: '#A9A49A',
       },
       fontFamily: {
-        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+        // The Noto fonts give the Hindi (Devanagari) and Gujarati letters. Latin letters keep the brand fonts.
+        serif: ['"Cormorant Garamond"', '"Noto Serif Devanagari"', '"Noto Serif Gujarati"', 'Georgia', 'serif'],
+        sans: ['"DM Sans"', '"Noto Sans Devanagari"', '"Noto Sans Gujarati"', 'system-ui', 'sans-serif'],
       },
       maxWidth: {
         page: '88rem',

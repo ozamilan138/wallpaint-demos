@@ -43,6 +43,41 @@
     text-wrap: pretty;
   }
 
+  /*
+   * Hindi and Gujarati.
+   * The letters have marks above and below the line, so the text needs more line height.
+   * Letter spacing breaks the joined letters, so it is removed. The logo has lang="en" and keeps its spacing.
+   * The Noto letters look larger than Cormorant at the same size, so the headings are a little smaller.
+   */
+  :is(:lang(hi), :lang(gu)) {
+    letter-spacing: normal !important;
+  }
+
+  html:is(:lang(hi), :lang(gu)) body {
+    line-height: 1.75;
+  }
+
+  html:is(:lang(hi), :lang(gu)) :is(h1, h2, h3, figcaption span) {
+    line-height: 1.35;
+  }
+
+  html:is(:lang(hi), :lang(gu)) h1 {
+    font-size: clamp(2.1rem, 1.5rem + 2.6vw, 3.5rem);
+  }
+
+  html:is(:lang(hi), :lang(gu)) h2 {
+    font-size: clamp(1.8rem, 1.4rem + 1.4vw, 2.7rem);
+  }
+
+  html:is(:lang(hi), :lang(gu)) h3 {
+    font-size: 23px;
+  }
+
+  /* Hindi and Gujarati letters are hard to read below 14px, so the small labels are a little larger. */
+  html:is(:lang(hi), :lang(gu)) :is(.text-\[12px\], .text-\[13px\]):not([lang='en'] *) {
+    font-size: 14px;
+  }
+
   :focus-visible {
     outline: 2px solid #9a8063;
     outline-offset: 3px;

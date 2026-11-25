@@ -2,11 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import { Menu, Phone, X } from 'lucide-react'
 import { navItems } from '../data/content'
 import { WhatsAppAction, CallAction } from './contact/ContactActions'
-import { estimateMessage } from '../lib/contact'
+import { useLanguage } from '../i18n/context'
+import { LanguageSwitch } from './LanguageSwitch'
 import { Wordmark } from './Wordmark'
 import { business } from '../config/business'
 
 export function Navbar() {
+  const { t } = useLanguage()
+  const estimateMessage = t.messages.estimate(t.businessName)
   const [open, setOpen] = useState(false)
   const toggleRef = useRef<HTMLButtonElement>(null)
 
@@ -38,7 +41,7 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-ink/10 bg-paper">
       <nav aria-label="Main" className="page-x mx-auto flex h-[68px] max-w-page items-center justify-between gap-6">
-        <a href="#top" className="shrink-0" aria-label={`${business.name}, back to top`} onClick={() => setOpen(false)}>
+        <a href="#top" className="shrink-0" aria-label={t.nav.backToTop(t.businessName)} onClick={() => setOpen(false)}>
           <Wordmark />
         </a>
 
@@ -46,22 +49,23 @@ export function Navbar() {
           {navItems.map((item) => (
             <li key={item.href}>
               <a href={item.href} className="py-2 text-[15px] text-muted transition-colors hover:text-ink">
-                {item.label}
+                {t.nav[item.key]}
               </a>
             </li>
           ))}
         </ul>
 
         <div className="flex items-center gap-2">
+          <LanguageSwitch />
           <CallAction
             className="hidden min-h-[44px] items-center gap-2 whitespace-nowrap px-3 text-[15px] font-medium text-ink transition-colors hover:text-bronze-deep xl:inline-flex"
-            ariaLabel={`Call ${business.phone}`}
+            ariaLabel={t.cta.callNumber(business.phone)}
           >
             <Phone aria-hidden size={16} className="text-bronze-deep" />
             {business.phone}
           </CallAction>
           <WhatsAppAction message={estimateMessage} className="btn btn-dark hidden min-h-[44px] whitespace-nowrap px-5 sm:inline-flex">
-            Get a Free Estimate
+            {t.cta.estimate}
           </WhatsAppAction>
           <button
             ref={toggleRef}
@@ -69,7 +73,7 @@ export function Navbar() {
             className="-mr-2 grid h-11 w-11 place-items-center text-ink lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
-            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
             onClick={() => setOpen((value) => !value)}
           >
             {open ? <X aria-hidden size={24} /> : <Menu aria-hidden size={24} />}
@@ -100,16 +104,16 @@ export function Navbar() {
                   }}
                   className="flex min-h-[56px] items-center text-[20px] font-medium text-ink"
                 >
-                  {item.label}
+                  {t.nav[item.key]}
                 </a>
               </li>
             ))}
           </ul>
           <div className="mt-auto grid gap-3 pt-10">
             <WhatsAppAction message={estimateMessage} className="btn btn-dark w-full">
-              Get a Free Estimate
+              {t.cta.estimate}
             </WhatsAppAction>
-            <CallAction className="btn btn-outline w-full">Call Now</CallAction>
+            <CallAction className="btn btn-outline w-full">{t.cta.callNow}</CallAction>
           </div>
         </div>
       </div>

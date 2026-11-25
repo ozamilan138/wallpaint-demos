@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { phoneUrl, whatsAppUrl } from '../../lib/contact'
-import { defaultWhatsAppMessage } from '../../config/business'
+import { useLanguage } from '../../i18n/context'
 import { useContactNotice } from './ContactProvider'
 
 interface ActionProps {
@@ -14,12 +14,15 @@ interface ActionProps {
  * If the number is not configured, it shows the demo notice instead.
  */
 export function WhatsAppAction({
-  message = defaultWhatsAppMessage,
+  message: customMessage,
   children,
   className,
   ariaLabel,
 }: ActionProps & { message?: string }) {
   const { showDemoNotice } = useContactNotice()
+  const { t } = useLanguage()
+  // Without a custom message, the general message in the selected language is used.
+  const message = customMessage ?? t.messages.general(t.businessName)
   const href = whatsAppUrl(message)
 
   if (href) {

@@ -26,7 +26,7 @@ export function Wordmark({ tone = 'dark', size = 'md' }: WordmarkProps) {
   const mark = tone === 'dark' ? 'text-bronze' : 'text-sand'
   const lg = size === 'lg'
   return (
-    <span className={`flex items-center leading-none ${lg ? 'gap-4' : 'gap-3'}`}>
+    <span lang="en" className={`flex items-center leading-none ${lg ? 'gap-4' : 'gap-3'}`}>
       <ArchMark className={`shrink-0 ${mark} ${lg ? 'h-12 w-12' : 'h-9 w-9'}`} />
       <span className="flex flex-col">
         <span className={`font-serif font-semibold leading-[0.85] tracking-[-0.01em] ${main} ${lg ? 'text-[38px]' : 'text-[29px]'}`}>

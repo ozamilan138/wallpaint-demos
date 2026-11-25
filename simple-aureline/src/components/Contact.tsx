@@ -1,5 +1,6 @@
 import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
-import { business, defaultWhatsAppMessage } from '../config/business'
+import { business } from '../config/business'
+import { useLanguage } from '../i18n/context'
 import { CallAction, WhatsAppAction } from './contact/ContactActions'
 import { emailUrl } from '../lib/contact'
 import { SectionHeading } from './SectionHeading'
@@ -14,6 +15,7 @@ const rowValue = 'mt-1 block text-[20px] text-paper'
 
 export function Contact() {
   const email = emailUrl()
+  const { t } = useLanguage()
 
   return (
     <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden bg-night text-paper">
@@ -22,17 +24,17 @@ export function Contact() {
 
       <div className="page-x relative mx-auto grid max-w-page gap-12 py-16 sm:py-24 lg:grid-cols-2 lg:items-end">
         <div>
-          <SectionHeading id="contact-title" title="Your Home Deserves a Beautiful Finish." tone="light">
-            Tell us about your rooms on WhatsApp, or give us a call. We reply with a free estimate.
+          <SectionHeading id="contact-title" title={t.contact.title} tone="light">
+            {t.contact.intro}
           </SectionHeading>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <WhatsAppAction message={defaultWhatsAppMessage} className="btn btn-light w-full sm:w-auto">
+            <WhatsAppAction className="btn btn-light w-full sm:w-auto">
               <MessageCircle aria-hidden size={18} />
-              Talk on WhatsApp
+              {t.cta.talkWhatsApp}
             </WhatsAppAction>
             <CallAction className="btn btn-outline-light w-full sm:w-auto">
               <Phone aria-hidden size={18} />
-              Call Now
+              {t.cta.callNow}
             </CallAction>
           </div>
         </div>
@@ -42,7 +44,7 @@ export function Contact() {
             <li className="flex items-start gap-4">
               <Phone aria-hidden size={20} className="mt-1 shrink-0 text-sand" />
               <div>
-                <span className={rowLabel}>Call or WhatsApp</span>
+                <span className={rowLabel}>{t.cta.callOrWhatsApp}</span>
                 <CallAction className={`${rowValue} font-medium underline decoration-paper/25 underline-offset-[6px] transition-colors hover:decoration-paper`}>
                   {business.phone}
                 </CallAction>
@@ -54,7 +56,7 @@ export function Contact() {
                 <li className="flex items-start gap-4">
                   <Phone aria-hidden size={20} className="mt-1 shrink-0 text-sand" />
                   <div>
-                    <span className={rowLabel}>Call</span>
+                    <span className={rowLabel}>{t.contact.call}</span>
                     <CallAction className={`${rowValue} font-medium`}>{business.phone}</CallAction>
                   </div>
                 </li>
@@ -63,7 +65,7 @@ export function Contact() {
                 <li className="flex items-start gap-4">
                   <MessageCircle aria-hidden size={20} className="mt-1 shrink-0 text-sand" />
                   <div>
-                    <span className={rowLabel}>WhatsApp</span>
+                    <span className={rowLabel}>{t.cta.whatsApp}</span>
                     <WhatsAppAction className={`${rowValue} font-medium`}>{business.whatsapp}</WhatsAppAction>
                   </div>
                 </li>
@@ -74,7 +76,7 @@ export function Contact() {
             <li className="flex items-start gap-4">
               <Mail aria-hidden size={20} className="mt-1 shrink-0 text-sand" />
               <div>
-                <span className={rowLabel}>Email</span>
+                <span className={rowLabel}>{t.contact.email}</span>
                 <a href={email} className={`${rowValue} underline underline-offset-4 hover:text-sand`}>
                   {business.email}
                 </a>
@@ -85,7 +87,7 @@ export function Contact() {
             <li className="flex items-start gap-4">
               <MapPin aria-hidden size={20} className="mt-1 shrink-0 text-sand" />
               <div>
-                <span className={rowLabel}>Service areas</span>
+                <span className={rowLabel}>{t.contact.areas}</span>
                 <span className={rowValue}>{business.serviceLocations.join(', ')}</span>
               </div>
             </li>
