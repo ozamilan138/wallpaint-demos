@@ -1,6 +1,7 @@
 import { ContactProvider } from './components/contact/ContactProvider'
 import { LanguageProvider } from './i18n/LanguageProvider'
 import { useLanguage } from './i18n/context'
+import type { Lang } from './i18n/context'
 import { Navbar } from './components/Navbar'
 import { Hero } from './components/Hero'
 import { Services } from './components/Services'
@@ -11,9 +12,9 @@ import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { FloatingWhatsApp, MobileActionBar } from './components/MobileActionBar'
 
-export default function App() {
+export default function App({ initialLang }: { initialLang: Lang }) {
   return (
-    <LanguageProvider>
+    <LanguageProvider initialLang={initialLang}>
       <Page />
     </LanguageProvider>
   )

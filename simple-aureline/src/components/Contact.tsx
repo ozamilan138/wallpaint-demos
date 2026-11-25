@@ -83,12 +83,12 @@ export function Contact() {
               </div>
             </li>
           )}
-          {business.serviceLocations.length > 0 && (
+          {t.serviceAreas.length > 0 && (
             <li className="flex items-start gap-4">
               <MapPin aria-hidden size={20} className="mt-1 shrink-0 text-sand" />
               <div>
                 <span className={rowLabel}>{t.contact.areas}</span>
-                <span className={rowValue}>{business.serviceLocations.join(', ')}</span>
+                <span className={rowValue}>{t.serviceAreas.join(', ')}</span>
               </div>
             </li>
           )}

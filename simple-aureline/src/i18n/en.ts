@@ -6,10 +6,15 @@
 export const en = {
   langName: 'English',
   meta: {
-    title: 'Maruti Paint House | Home and Apartment Painting',
+    // Search words first, the brand name last. Keep the title below 60 characters and the description below 160.
+    title: 'House Painter in Ahmedabad | Maruti Paint House',
+    description: (phone: string) =>
+      `House painter in Ahmedabad for interior, exterior, texture and apartment painting. Careful preparation, clean finishes. Free estimate: ${phone}`,
   },
   businessName: 'Maruti Paint House',
   description: 'Home and apartment painting with honest colour advice, careful preparation and clean, beautiful finishes.',
+  /** The areas that the business works in. Keep them in step with serviceLocations in src/config/business.ts. */
+  serviceAreas: ['Ahmedabad'],
   skip: 'Skip to content',
   language: 'Language',
   nav: {
@@ -36,7 +41,7 @@ export const en = {
   },
   sampleImage: 'Sample image',
   hero: {
-    eyebrow: 'Home Painting',
+    eyebrow: 'House Painting in Ahmedabad',
     title: 'Give Your Walls a New Perspective.',
     lead: 'Thoughtfully chosen colours. Beautiful finishes. Painting that brings your home to life.',
     explore: 'Explore Our Work',
@@ -44,7 +49,7 @@ export const en = {
   },
   services: {
     title: 'Our Services',
-    intro: 'Painting for homes and apartments, inside and out.',
+    intro: 'Painting for homes and apartments across Ahmedabad, inside and out.',
     ask: 'Ask about this',
     askAria: (service: string) => `Ask about ${service} on WhatsApp`,
     items: [

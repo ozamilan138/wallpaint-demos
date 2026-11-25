@@ -3,23 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Maruti Paint House | Home and Apartment Painting</title>
-    <meta
-      name="description"
-      content="Maruti Paint House paints homes and apartments with honest colour advice, careful preparation and clean, beautiful finishes. Call or WhatsApp +91 87805 74095 for a free estimate."
-    />
+    <!--
+      The build (scripts/build.mjs) makes one page for each language from this file.
+      It replaces the title and the description, and it puts the search engine tags at the seo-tags comment.
+      The addresses in those tags come from src/config/site.ts.
+    -->
+    <title>House Painter in Ahmedabad | Maruti Paint House</title>
+    <meta name="description" content="Maruti Paint House is a house painter in Ahmedabad." />
+    <!--seo-tags-->
+    <script>
+      // On the English page only: open the language page of the visitor, if it is Hindi or Gujarati.
+      // The order: an old ?lang= link, then the last choice on this device, then the language of the browser.
+      // The key 'lang' is the same as STORAGE_KEY in src/i18n/context.ts.
+      ;(function () {
+        if (document.documentElement.lang !== 'en') return
+        var path = location.pathname.replace(/index\.html$/, '')
+        if (path.slice(-1) !== '/') path += '/'
+        // The development server shows this file on every address, so stop if this is already a language page.
+        if (/\/(hi|gu)\/$/.test(path)) return
+        var want = new URLSearchParams(location.search).get('lang')
+        if (!want) {
+          try {
+            want = localStorage.getItem('lang')
+          } catch (e) {}
+        }
+        if (!want) {
+          var tags = navigator.languages || [navigator.language || '']
+          for (var i = 0; i < tags.length; i++) {
+            var code = String(tags[i]).toLowerCase().split('-')[0]
+            if (code === 'en' || code === 'hi' || code === 'gu') {
+              want = code
+              break
+            }
+          }
+        }
+        if (want !== 'hi' && want !== 'gu') return
+        location.replace(path + want + '/' + location.hash)
+      })()
+    </script>
     <meta name="theme-color" content="#F8F6F1" />
-    <meta property="og:title" content="Maruti Paint House" />
-    <meta
-      property="og:description"
-      content="Home painting with clean, beautiful finishes. Call or WhatsApp +91 87805 74095 for a free estimate."
-    />
-    <meta property="og:type" content="website" />
-    <!-- The preview image needs a full URL. Change it when the site moves to its own domain. -->
-    <meta property="og:image" content="https://ozamilan138.github.io/wallpaint-demos/simple-aureline/og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <!-- The Noto fonts are for Hindi and Gujarati. The browser downloads them only when the page shows those letters. -->

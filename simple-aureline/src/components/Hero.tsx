@@ -23,12 +23,11 @@ export function Hero() {
         </div>
 
         <div className="lg:order-1">
-          <p className="mb-5 text-[13px] font-medium uppercase tracking-[0.22em] text-bronze-deep">
+          {/* The main heading gives search engines the name, the service and the city. The slogan below it is larger. */}
+          <h1 id="hero-title" className="mb-5 font-sans text-[13px] font-medium uppercase tracking-[0.22em] text-bronze-deep">
             {t.businessName} · {t.hero.eyebrow}
-          </p>
-          <h1 id="hero-title" className="text-[clamp(2.5rem,1.6rem+3.4vw,4.25rem)] leading-[1.02]">
-            {t.hero.title}
           </h1>
+          <p className="hero-slogan text-[clamp(2.5rem,1.6rem+3.4vw,4.25rem)] leading-[1.02]">{t.hero.title}</p>
           <p className="mt-5 max-w-[30rem] text-[18px] leading-[1.6]">
             {t.hero.lead}
           </p>

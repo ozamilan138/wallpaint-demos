@@ -16,31 +16,27 @@ export const switchLabels: Record<Lang, { full: string; short: string }> = {
   gu: { full: 'ગુજરાતી', short: 'ગુ' },
 }
 
+// The inline script in index.html reads the same key. Change both together.
 const STORAGE_KEY = 'lang'
 
 const isLang = (value: string | null | undefined): value is Lang => languages.includes(value as Lang)
 
+/** The folder of each language page: "" for English, "hi/" for Hindi and "gu/" for Gujarati. */
+export const langDir = (lang: Lang) => (lang === 'en' ? '' : `${lang}/`)
+
+/** The full path of a language page, for example "/wallpaint-demos/simple-aureline/gu/". */
+export const langPath = (lang: Lang) => `${import.meta.env.BASE_URL}${langDir(lang)}`
+
 /**
- * The first language comes from, in this order:
- * 1. the link, for example ?lang=gu,
- * 2. the last choice on this device,
- * 3. the language of the phone or the browser,
- * 4. English.
+ * The address of the page gives the language: ".../hi/" is Hindi, ".../gu/" is Gujarati, and all other pages are English.
+ * Each language has its own page, so that search engines can find and show all three.
+ * On the English page, the inline script in index.html can first send a visitor to their language page.
  */
-export function initialLang(): Lang {
-  const fromUrl = new URLSearchParams(window.location.search).get('lang')
-  if (isLang(fromUrl)) return fromUrl
-  try {
-    const saved = window.localStorage.getItem(STORAGE_KEY)
-    if (isLang(saved)) return saved
-  } catch {
-    // Storage can be blocked, for example in a private window.
-  }
-  for (const tag of navigator.languages ?? [navigator.language]) {
-    const base = tag.toLowerCase().split('-')[0]
-    if (isLang(base)) return base
-  }
-  return 'en'
+export function langFromPath(pathname: string): Lang {
+  const base = import.meta.env.BASE_URL
+  const rest = pathname.startsWith(base) ? pathname.slice(base.length) : pathname.replace(/^\//, '')
+  const first = rest.split('/')[0]
+  return isLang(first) ? first : 'en'
 }
 
 export function saveLang(lang: Lang) {

@@ -62,6 +62,8 @@ export function ContactProvider({ children }: { children: ReactNode }) {
           if (event.target === dialogRef.current) close()
         }}
       >
+        {/* The content renders only when the notice opens. Then search engines do not read the demo text as page text. */}
+        {notice && (
         <div className="p-6 sm:p-8">
           <div className="flex items-start justify-between gap-6">
             <div className="flex items-center gap-3 text-bronze-deep">
@@ -109,6 +111,7 @@ export function ContactProvider({ children }: { children: ReactNode }) {
             For the site owner: add the details in <code className="text-ink">src/config/business.ts</code>.
           </p>
         </div>
+        )}
       </dialog>
     </ContactContext.Provider>
   )
